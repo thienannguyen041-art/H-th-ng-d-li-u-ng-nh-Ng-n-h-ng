@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Offline Banking Sector Analytics Dashboard</title>
+  <style>
+    :root {
+      --navy: #002060;
+      --blue: #0C3392;
+      --cyan: #00B0F0;
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --text: #13213c;
+      --muted: #6f7d96;
+      --line: #dfe6f1;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 32px 16px;
+      background: radial-gradient(circle at top left, rgba(0,176,240,.18), transparent 32%), linear-gradient(135deg, #f7fbff, #eef4fb);
+    }
+    .wrap {
+      width: min(1080px, 100%);
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: 0 16px 48px rgba(0, 32, 96, .08);
+    }
+    .badge {
+      display: inline-flex;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #eaf3ff;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(32px, 5vw, 54px);
+      line-height: 1.04;
+      color: var(--navy);
+      letter-spacing: -1.2px;
+    }
+    .lead {
+      font-size: 17px;
+      color: var(--muted);
+      margin: 0 0 24px;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    a.button {
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      border-radius: 12px;
+      padding: 0 16px;
+      font-size: 14px;
+      font-weight: 700;
+      border: 1px solid var(--line);
+      color: var(--navy);
+      background: #fff;
+    }
+    a.primary {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px;
+      background: #fbfdff;
+    }
+    .card strong {
+      display: block;
+      color: var(--navy);
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+    .card span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .mock {
+      display: grid;
+      gap: 12px;
+    }
+    .topbar {
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(90deg, var(--navy), var(--blue));
+    }
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .kpi {
+      height: 78px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      padding: 12px;
+    }
+    .kpi i {
+      display: block;
+      width: 60%;
+      height: 8px;
+      border-radius: 999px;
+      background: #cbd8ea;
+      margin-bottom: 14px;
+    }
+    .kpi b {
+      display: block;
+      width: 42%;
+      height: 16px;
+      border-radius: 999px;
+      background: var(--navy);
+    }
+    .chart {
+      height: 210px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(180deg, #fff, #f7faff);
+      position: relative;
+      overflow: hidden;
+    }
+    .chart:before {
+      content: "";
+      position: absolute;
+      left: 32px;
+      right: 32px;
+      bottom: 42px;
+      height: 86px;
+      border-bottom: 4px solid var(--blue);
+      border-left: 4px solid var(--cyan);
+      transform: skewX(-12deg);
+      opacity: .75;
+    }
+    .note {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: #fff8e4;
+      color: #6b4b00;
+      font-size: 13px;
+    }
+    @media (max-width: 860px) {
+      .wrap { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="hero">
+    <section class="wrap">
+      <div class="panel">
+        <div class="badge">Finance Analytics Portfolio Project</div>
+        <h1>Offline Banking Sector Analytics Dashboard</h1>
+        <p class="lead">
+          An offline HTML-based dashboard for Vietnam banking sector analysis, designed to transform structured Excel data into sector KPIs, bank-level analysis, peer comparison, financial statement views, and customizable charts.
+        </p>
+        <div class="grid">
+          <div class="card"><strong>Sector overview</strong><span>Track banking KPIs and industry-level performance.</span></div>
+          <div class="card"><strong>Bank analysis</strong><span>Review individual bank metrics, trends, and financial statements.</span></div>
+          <div class="card"><strong>Peer comparison</strong><span>Compare banks across profitability, asset quality, efficiency, and growth.</span></div>
+          <div class="card"><strong>Chart builder</strong><span>Create custom visualizations for research and reporting.</span></div>
+        </div>
+        <div class="actions">
+          <a class="button primary" href="https://github.com/thienannguyen041-art/H-th-ng-d-li-u-ng-nh-Ng-n-h-ng" target="_blank" rel="noreferrer">View GitHub Repository</a>
+          <a class="button" href="README.md">Read Project Notes</a>
+        </div>
+        <div class="note">
+          The full offline build is a large single HTML file because it embeds JavaScript libraries and default banking data. For CV use, this repository serves as the public portfolio page, while the full offline demo can be stored in Google Drive or uploaded manually as a release asset.
+        </div>
+      </div>
+      <div class="panel mock" aria-label="Dashboard preview illustration">
+        <div class="topbar"></div>
+        <div class="kpis">
+          <div class="kpi"><i></i><b></b></div>
+          <div class="kpi"><i></i><b></b></div>
+          <div class="kpi"><i></i><b></b></div>
+        </div>
+        <div class="chart"></div>
+        <div class="grid">
+          <div class="card"><strong>Excel update</strong><span>Local data workflow</span></div>
+          <div class="card"><strong>Interactive charts</strong><span>Decision-support view</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
