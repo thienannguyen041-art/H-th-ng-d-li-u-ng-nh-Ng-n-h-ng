@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Đang tải | Ôn tập Thẩm định dự án đầu tư</title>
+<style>
+body{margin:0;display:grid;place-items:center;min-height:100vh;background:#f4f7fb;color:#172033;font:16px/1.6 Inter,Segoe UI,Arial,sans-serif}
+.box{width:min(520px,calc(100% - 32px));background:white;border:1px solid #dfe6f0;border-radius:18px;padding:28px;box-shadow:0 10px 30px rgba(25,48,89,.08)}
+h1{font-size:22px;margin:0 0 8px;color:#174ea6}p{margin:6px 0;color:#68738a}
+.bar{height:9px;background:#dfe6f0;border-radius:99px;overflow:hidden;margin-top:18px}.bar i{display:block;height:100%;width:35%;background:#174ea6;border-radius:99px;animation:load 1.1s infinite alternate}
+@keyframes load{to{transform:translateX(185%)}}
+.err{color:#c9302c;white-space:pre-wrap}
+</style>
+</head>
+<body><div class="box"><h1>Ôn tập Thẩm định dự án đầu tư</h1><p id="status">Đang tải dữ liệu học tập…</p><div class="bar" id="bar"><i></i></div></div>
+<script>
+(async()=>{
+  const files=["data/part-01.txt", "data/part-02.txt", "data/part-03.txt", "data/part-04.txt"];
+  try{
+    const parts=await Promise.all(files.map(async f=>{const r=await fetch(f);if(!r.ok)throw new Error(`Không tải được ${f} (${r.status})`);return r.text();}));
+    const b64=parts.join('').replace(/\s+/g,'');
+    const bin=atob(b64);
+    const bytes=Uint8Array.from(bin,c=>c.charCodeAt(0));
+    if(!('DecompressionStream' in window)) throw new Error('Trình duyệt chưa hỗ trợ giải nén trực tiếp. Hãy mở bằng Chrome, Edge, Firefox hoặc Safari phiên bản mới.');
+    const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
+    const html=await new Response(stream).text();
+    document.open();document.write(html);document.close();
+  }catch(e){
+    document.getElementById('bar').remove();
+    const s=document.getElementById('status');s.className='err';s.textContent='Không thể tải website. '+e.message;
+  }
+})();
+</script></body></html>
